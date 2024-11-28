@@ -1,4 +1,8 @@
 import ProjectCard from "./ProjectCard";
+import mernEcom from "../../assets/mernEcom.jpeg";
+import liveDocs from "../../assets/liveDocs.jpeg";
+import countryDetails from "../../assets/countryDetails.jpeg";
+import patientApp from "../../assets/pms.jpeg";
 
 const projects = [
   {
@@ -6,21 +10,28 @@ const projects = [
     title: "MERN Ecommerce Site",
     description: "MERN Ecommerce Site",
     href: "https://mern-ecom-frontend-l1ue.onrender.com",
-    thumbnail: "https://placehold.co/600x400",
+    thumbnail: mernEcom,
   },
   {
     id: 2,
     title: "Patient Appointment Management System",
     description: "Patient Appointment Management System",
     href: "https://patient-management-system-six.vercel.app/",
-    thumbnail: "https://placehold.co/600x400",
+    thumbnail: patientApp,
   },
   {
     id: 3,
     title: "Live Docs",
     description: "Live Docs",
     href: "https://rubinbaidhya.com.np/",
-    thumbnail: "https://placehold.co/600x400",
+    thumbnail: liveDocs,
+  },
+  {
+    id: 4,
+    title: "Country Details",
+    description: "Country Details",
+    href: "https://countries-detail.vercel.app/",
+    thumbnail: countryDetails,
   },
 ];
 

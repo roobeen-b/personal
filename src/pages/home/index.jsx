@@ -15,6 +15,8 @@ const HomePage = () => {
         <TechStack />
         <Separator />
         <Projects />
+        <Separator />
+        <Header />
       </main>
     </div>
   );

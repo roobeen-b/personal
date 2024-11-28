@@ -1,3 +1,4 @@
+import splashPageImage from "../../assets/splashPage.jpg";
 const MainSection = () => {
   return (
     <div className="flex lg:h-[calc(100vh-96px)] items-center">
@@ -6,18 +7,24 @@ const MainSection = () => {
           Nice to meet you. I&apos;m{" "}
           <span className="underline decoration-green-700">Rubin.</span>
         </h1>
-        <p className="my-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure sit ut
-          eos at, expedita nemo quae consequuntur illo doloremque, ea dolore
-          quibusdam, itaque aliquid hic aspernatur nihil recusandae eius
-          similique.
+        <p className="my-4 text-muted-foreground">
+          Software Engineer | Web Developer
         </p>
 
-        <button className="border-b-2 border-green-700 pb-1 text-2xl">
+        <button
+          className="border-b-2 border-green-700 pb-1 mt-2 text-2xl"
+          onClick={() => window.open(`mailto:${import.meta.env.MAIL_ID}`)}
+        >
           Contact Me
         </button>
       </div>
-      <div className="basis-2/5"></div>
+      <div className="basis-2/5">
+        <img
+          src={splashPageImage}
+          alt="splash page image"
+          className="shadow-[0_30px_40px_rgba(0,_0,_0,_0.1)]"
+        />
+      </div>
     </div>
   );
 };
