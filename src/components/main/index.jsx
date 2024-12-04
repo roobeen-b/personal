@@ -1,7 +1,8 @@
 import splashPageImage from "../../assets/splashPage.jpg";
+import Button from "../common/Button";
 const MainSection = () => {
   return (
-    <div className="flex lg:h-[calc(100vh-96px)] items-center">
+    <div className="flex flex-col-reverse lg:flex-row lg:h-[calc(100vh-96px)] items-center">
       <div className="lg:basis-3/5">
         <h1 className="text-6xl lg:text-8xl font-bold my-4">
           Nice to meet you. I&apos;m{" "}
@@ -11,14 +12,14 @@ const MainSection = () => {
           Software Engineer | Web Developer
         </p>
 
-        <button
-          className="border-b-2 border-green-700 pb-1 mt-2 text-2xl"
-          onClick={() => window.open(`mailto:${import.meta.env.MAIL_ID}`)}
+        <Button
+          onButtonClick={() => window.open(`mailto:${import.meta.env.MAIL_ID}`)}
+          className="text-2xl"
         >
           Contact Me
-        </button>
+        </Button>
       </div>
-      <div className="basis-2/5">
+      <div className="lg:basis-2/5">
         <img
           src={splashPageImage}
           alt="splash page image"
