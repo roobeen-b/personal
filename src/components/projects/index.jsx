@@ -3,6 +3,7 @@ import mernEcom from "../../assets/mernEcom.jpeg";
 import liveDocs from "../../assets/liveDocs.jpeg";
 import countryDetails from "../../assets/countryDetails.jpeg";
 import patientApp from "../../assets/pms.jpeg";
+import reactCoding from "../../assets/reactCoding.jpeg";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -60,6 +61,15 @@ const projects = [
     codeHref: "https://github.com/roobeen-b/marksheet_scanner",
     thumbnail: "https://placehold.co/600x400",
     category: "mobile",
+  },
+  {
+    id: 7,
+    title: "React Coding Problems",
+    description: "Some of the frontend (React) coding problems",
+    liveHref: "https://react-coding-problems-rouge.vercel.app/",
+    codeHref: "https://github.com/roobeen-b/react-coding-problems",
+    thumbnail: reactCoding,
+    category: "web",
   },
 ];
 
