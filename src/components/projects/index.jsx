@@ -4,6 +4,7 @@ import liveDocs from "../../assets/liveDocs.jpeg";
 import countryDetails from "../../assets/countryDetails.jpeg";
 import patientApp from "../../assets/pms.jpeg";
 import reactCoding from "../../assets/reactCoding.jpeg";
+import productListWithCart from "../../assets/productListWithCart.jpeg";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -69,6 +70,15 @@ const projects = [
     liveHref: "https://react-coding-problems-rouge.vercel.app/",
     codeHref: "https://github.com/roobeen-b/react-coding-problems",
     thumbnail: reactCoding,
+    category: "web",
+  },
+  {
+    id: 8,
+    title: "Product List With Card",
+    description: "Product List With Cart",
+    liveHref: "https://product-list-with-cart-mu-lemon.vercel.app/",
+    codeHref: "https://github.com/roobeen-b/product-list-with-cart",
+    thumbnail: productListWithCart,
     category: "web",
   },
 ];
