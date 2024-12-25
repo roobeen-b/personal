@@ -4,10 +4,12 @@ import { toast } from "@/hooks/use-toast";
 import { registerService } from "@/services";
 import { checkAuthService, loginService } from "@/services";
 import { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
+  const location = useLocation();
   const [auth, setAuth] = useState({
     authenticated: false,
     user: null,
@@ -54,6 +56,10 @@ export default function AuthProvider({ children }) {
 
   //check auth user
   async function checkAuthUser() {
+    if (location.pathname === "/") {
+      setLoading(false);
+      return;
+    }
     try {
       const data = await checkAuthService();
       if (data.success) {

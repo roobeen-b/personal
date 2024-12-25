@@ -82,7 +82,7 @@ const AdminProjects = () => {
               thumbnail: uploadedImageUrl,
             })
           : await editProjectService({
-              formData: values,
+              formData: { ...values, thumbnail: uploadedImageUrl },
               id: currentEditedId,
             });
 

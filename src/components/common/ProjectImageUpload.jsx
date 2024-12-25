@@ -14,7 +14,7 @@ const ProjectImageUpload = ({
   setUploadedImageUrl,
   imageLoadingState,
   setImageLoadingState,
-  isEditMode,
+  // isEditMode,
 }) => {
   const inputRef = useRef(null);
 
@@ -76,9 +76,13 @@ const ProjectImageUpload = ({
         {!imageFile ? (
           <Label
             htmlFor="image-upload"
-            className={`flex flex-col items-center justify-center cursor-pointer h-32 ${
-              isEditMode ? "opacity-60 cursor-not-allowed" : ""
-            }`}
+            className={
+              `flex flex-col items-center justify-center cursor-pointer h-32`
+              //   ${
+              //   isEditMode ? "opacity-60 cursor-not-allowed" : ""
+              // }
+              // `
+            }
           >
             <Input
               type="file"
@@ -86,7 +90,7 @@ const ProjectImageUpload = ({
               ref={inputRef}
               className="hidden"
               onChange={handleImageFileChange}
-              disabled={isEditMode}
+              // disabled={isEditMode}
             />
             <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
             <span>Drag & drop or click to upload image</span>

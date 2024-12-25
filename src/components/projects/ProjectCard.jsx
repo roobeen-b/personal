@@ -17,8 +17,12 @@ const ProjectCard = ({ project }) => {
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div>
-          <img src={project.thumbnail} alt={project.title} className="w-full" />
+        <div className="h-36">
+          <img
+            src={project.thumbnail}
+            alt={project.title}
+            className="w-full h-full object-contain"
+          />
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
