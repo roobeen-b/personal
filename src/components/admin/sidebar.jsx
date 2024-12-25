@@ -28,6 +28,12 @@ const adminSidebarMenuItems = [
     path: "/dashboard/skills",
     icon: <BadgeCheck />,
   },
+  {
+    id: "categories",
+    label: "Categories",
+    path: "/dashboard/categories",
+    icon: <BadgeCheck />,
+  },
 ];
 
 function MenuItems({ setOpen }) {

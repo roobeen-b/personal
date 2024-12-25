@@ -24,6 +24,7 @@ import {
   addNewProjectService,
   deleteProjectService,
   editProjectService,
+  fetchAllCategoryService,
   fetchAllProjectsService,
 } from "@/services";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,6 +53,7 @@ const AdminProjects = () => {
   const [imageLoadingState, setImageLoadingState] = useState(false);
   const [currentEditedId, setCurrentEditedId] = useState(null);
   const [allProjects, setAllProjects] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -66,10 +68,13 @@ const AdminProjects = () => {
 
   const fetchData = async () => {
     const result = await fetchAllProjectsService();
-    if (result?.success) {
+    const categoryResult = await fetchAllCategoryService();
+    if (result?.success && categoryResult?.success) {
       setAllProjects(result?.data);
+      setAllCategories(categoryResult?.data);
     } else {
       setAllProjects([]);
+      setAllCategories([]);
     }
   };
 
@@ -145,6 +150,7 @@ const AdminProjects = () => {
       codeHref: "",
       category: "web",
     });
+    setImageFile(null);
     setCurrentEditedId(null);
     setOpen(false);
   }
@@ -276,20 +282,26 @@ const AdminProjects = () => {
                             defaultValue={field.value}
                             className="flex flex-col space-y-1"
                           >
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="web" />
-                              </FormControl>
-                              <FormLabel className="font-normal">Web</FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="mobile" />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                Mobile
-                              </FormLabel>
-                            </FormItem>
+                            {allCategories && allCategories.length > 0 ? (
+                              allCategories.map((category) => (
+                                <FormItem
+                                  className="flex items-center space-x-3 space-y-0"
+                                  key={category?._id}
+                                >
+                                  <FormControl>
+                                    <RadioGroupItem value={category?.alias} />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {category?.name}
+                                  </FormLabel>
+                                </FormItem>
+                              ))
+                            ) : (
+                              <p>
+                                No categories found. Please add first to
+                                continue.
+                              </p>
+                            )}
                           </RadioGroup>
                         </FormControl>
                         <FormMessage />
@@ -299,16 +311,16 @@ const AdminProjects = () => {
 
                   <Button
                     type="submit"
-                    disabled={currentEditedId === null && imageFile === null}
+                    disabled={allCategories.length === 0 || imageFile === null}
                     title={
-                      currentEditedId === null && imageFile === null
+                      imageFile === null
                         ? "Please choose a project thumbnail first."
                         : `${
                             currentEditedId === null ? "Add new" : "Edit"
                           } project`
                     }
                     className={
-                      currentEditedId === null && imageFile === null
+                      imageFile === null
                         ? "cursor-not-allowed"
                         : "cursor-pointer"
                     }
