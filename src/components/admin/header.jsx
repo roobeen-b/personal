@@ -19,7 +19,7 @@ const AdminHeader = ({ setOpen }) => {
   }
 
   return (
-    <header className="flex justify-between items-center py-4 px-4 bg-background border-b">
+    <header className="flex justify-between items-center py-4 px-4 md:px-6 bg-background border-b">
       <div>
         <Button className="lg:hidden" onClick={() => setOpen(true)}>
           <Menu />

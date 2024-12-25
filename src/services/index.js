@@ -47,3 +47,27 @@ export async function deleteProjectService(id) {
 
   return data;
 }
+
+export async function fetchAllSkillsService() {
+  const { data } = await axiosInstance.get("/skill");
+
+  return data;
+}
+
+export async function addNewSkillService(formData) {
+  const { data } = await axiosInstance.post("/skill/add", formData);
+
+  return data;
+}
+
+export async function editSkillService({ formData, id }) {
+  const { data } = await axiosInstance.put(`/skill/edit/${id}`, formData);
+
+  return data;
+}
+
+export async function deleteSkillService(id) {
+  const { data } = await axiosInstance.delete(`/skill/delete/${id}`);
+
+  return data;
+}
