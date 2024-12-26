@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import {
-  BadgeCheck,
+  ChartBarStacked,
   ChartNoAxesCombined,
+  Cpu,
+  FolderKanban,
   LayoutDashboard,
-  ShoppingBasket,
 } from "lucide-react";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,13 +21,19 @@ const adminSidebarMenuItems = [
     id: "projects",
     label: "Projects",
     path: "/dashboard/projects",
-    icon: <ShoppingBasket />,
+    icon: <FolderKanban />,
   },
   {
     id: "skills",
     label: "Skills",
     path: "/dashboard/skills",
-    icon: <BadgeCheck />,
+    icon: <Cpu />,
+  },
+  {
+    id: "categories",
+    label: "Categories",
+    path: "/dashboard/categories",
+    icon: <ChartBarStacked />,
   },
 ];
 

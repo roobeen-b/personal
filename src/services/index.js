@@ -71,3 +71,27 @@ export async function deleteSkillService(id) {
 
   return data;
 }
+
+export async function fetchAllCategoryService() {
+  const { data } = await axiosInstance.get("/category");
+
+  return data;
+}
+
+export async function addNewCategoryService(formData) {
+  const { data } = await axiosInstance.post("/category/add", formData);
+
+  return data;
+}
+
+export async function editCategoryService({ formData, id }) {
+  const { data } = await axiosInstance.put(`/category/edit/${id}`, formData);
+
+  return data;
+}
+
+export async function deleteCategoryService(id) {
+  const { data } = await axiosInstance.delete(`/category/delete/${id}`);
+
+  return data;
+}

@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
@@ -24,6 +25,7 @@ import {
   addNewProjectService,
   deleteProjectService,
   editProjectService,
+  fetchAllCategoryService,
   fetchAllProjectsService,
 } from "@/services";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,6 +54,7 @@ const AdminProjects = () => {
   const [imageLoadingState, setImageLoadingState] = useState(false);
   const [currentEditedId, setCurrentEditedId] = useState(null);
   const [allProjects, setAllProjects] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -66,10 +69,13 @@ const AdminProjects = () => {
 
   const fetchData = async () => {
     const result = await fetchAllProjectsService();
-    if (result?.success) {
+    const categoryResult = await fetchAllCategoryService();
+    if (result?.success && categoryResult?.success) {
       setAllProjects(result?.data);
+      setAllCategories(categoryResult?.data);
     } else {
       setAllProjects([]);
+      setAllCategories([]);
     }
   };
 
@@ -90,6 +96,7 @@ const AdminProjects = () => {
         fetchData();
         setOpen(false);
         setImageFile(null);
+        setCurrentEditedId(null);
         form.reset();
         toast({
           title: res?.message,
@@ -111,6 +118,7 @@ const AdminProjects = () => {
 
   async function handleEdit(project) {
     setCurrentEditedId(project?._id);
+    setUploadedImageUrl(project?.thumbnail);
     form.reset({
       title: project?.title,
       description: project?.description,
@@ -145,6 +153,7 @@ const AdminProjects = () => {
       codeHref: "",
       category: "web",
     });
+    setImageFile(null);
     setCurrentEditedId(null);
     setOpen(false);
   }
@@ -192,9 +201,22 @@ const AdminProjects = () => {
                     setImageFile={setImageFile}
                     imageLoadingState={imageLoadingState}
                     setImageLoadingState={setImageLoadingState}
+                    uploadedImageUrl={uploadedImageUrl}
                     setUploadedImageUrl={setUploadedImageUrl}
                     isEditMode={currentEditedId !== null}
                   />
+                  {currentEditedId !== null && imageFile === null && (
+                    <div>
+                      <Label>Current thumbnail</Label>
+                      <div className="h-32 w-32">
+                        <img
+                          src={uploadedImageUrl}
+                          alt="Project thumbnail"
+                          className="size-full object-contain"
+                        />
+                      </div>
+                    </div>
+                  )}
                   <FormField
                     control={form.control}
                     name="title"
@@ -276,20 +298,26 @@ const AdminProjects = () => {
                             defaultValue={field.value}
                             className="flex flex-col space-y-1"
                           >
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="web" />
-                              </FormControl>
-                              <FormLabel className="font-normal">Web</FormLabel>
-                            </FormItem>
-                            <FormItem className="flex items-center space-x-3 space-y-0">
-                              <FormControl>
-                                <RadioGroupItem value="mobile" />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                Mobile
-                              </FormLabel>
-                            </FormItem>
+                            {allCategories && allCategories.length > 0 ? (
+                              allCategories.map((category) => (
+                                <FormItem
+                                  className="flex items-center space-x-3 space-y-0"
+                                  key={category?._id}
+                                >
+                                  <FormControl>
+                                    <RadioGroupItem value={category?.alias} />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {category?.name}
+                                  </FormLabel>
+                                </FormItem>
+                              ))
+                            ) : (
+                              <p>
+                                No categories found. Please add first to
+                                continue.
+                              </p>
+                            )}
                           </RadioGroup>
                         </FormControl>
                         <FormMessage />
@@ -299,7 +327,10 @@ const AdminProjects = () => {
 
                   <Button
                     type="submit"
-                    disabled={currentEditedId === null && imageFile === null}
+                    disabled={
+                      allCategories.length === 0 ||
+                      (currentEditedId === null && imageFile === null)
+                    }
                     title={
                       currentEditedId === null && imageFile === null
                         ? "Please choose a project thumbnail first."

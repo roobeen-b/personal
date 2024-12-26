@@ -10,6 +10,8 @@ import { AuthContext } from "./context/auth-context";
 import AdminLayout from "./pages/admin/layout";
 import AdminProjects from "./pages/admin/projects";
 import AdminSkills from "./pages/admin/skills";
+import AdminCategories from "./pages/admin/categories";
+import NotFoundPage from "./pages/not-found";
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -45,7 +47,9 @@ function App() {
           <Route path="" element={<AdminDashboard />} />
           <Route path="projects" element={<AdminProjects />} />
           <Route path="skills" element={<AdminSkills />} />
+          <Route path="categories" element={<AdminCategories />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Toaster />
     </div>

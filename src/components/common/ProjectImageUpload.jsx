@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
+import { UploadCloudIcon, XIcon } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { useEffect, useRef } from "react";
@@ -11,6 +11,7 @@ import { imageUploadService } from "@/services";
 const ProjectImageUpload = ({
   imageFile,
   setImageFile,
+  uploadedImageUrl,
   setUploadedImageUrl,
   imageLoadingState,
   setImageLoadingState,
@@ -99,8 +100,15 @@ const ProjectImageUpload = ({
           <Skeleton className="h-10 bg-gray-200" />
         ) : (
           <div className="flex items-center justify-center">
+            <div className="h-32 w-32 mr-2">
+              <img
+                src={uploadedImageUrl}
+                alt="Project thumbnail"
+                className="size-full object-contain"
+              />
+            </div>
             <div>
-              <FileIcon className="w-6 text-primary mr-2 h-6" />
+              {/* <FileIcon className="w-6 text-primary mr-2 h-6" /> */}
             </div>
             <p className="text-sm font-medium">{imageFile.name}</p>
             <Button

@@ -4,12 +4,14 @@ import { toast } from "@/hooks/use-toast";
 import { registerService } from "@/services";
 import { checkAuthService, loginService } from "@/services";
 import { createContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [auth, setAuth] = useState({
     authenticated: false,
     user: null,
@@ -22,6 +24,7 @@ export default function AuthProvider({ children }) {
       toast({
         title: res?.message,
       });
+      navigate("/login");
     } else {
       toast({
         title: res?.message,
@@ -60,6 +63,7 @@ export default function AuthProvider({ children }) {
       setLoading(false);
       return;
     }
+
     try {
       const data = await checkAuthService();
       if (data.success) {
