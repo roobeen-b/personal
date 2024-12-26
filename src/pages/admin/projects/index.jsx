@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
@@ -95,6 +96,7 @@ const AdminProjects = () => {
         fetchData();
         setOpen(false);
         setImageFile(null);
+        setCurrentEditedId(null);
         form.reset();
         toast({
           title: res?.message,
@@ -116,6 +118,7 @@ const AdminProjects = () => {
 
   async function handleEdit(project) {
     setCurrentEditedId(project?._id);
+    setUploadedImageUrl(project?.thumbnail);
     form.reset({
       title: project?.title,
       description: project?.description,
@@ -198,9 +201,22 @@ const AdminProjects = () => {
                     setImageFile={setImageFile}
                     imageLoadingState={imageLoadingState}
                     setImageLoadingState={setImageLoadingState}
+                    uploadedImageUrl={uploadedImageUrl}
                     setUploadedImageUrl={setUploadedImageUrl}
                     isEditMode={currentEditedId !== null}
                   />
+                  {currentEditedId !== null && imageFile === null && (
+                    <div>
+                      <Label>Current thumbnail</Label>
+                      <div className="h-32 w-32">
+                        <img
+                          src={uploadedImageUrl}
+                          alt="Project thumbnail"
+                          className="size-full object-contain"
+                        />
+                      </div>
+                    </div>
+                  )}
                   <FormField
                     control={form.control}
                     name="title"
@@ -311,16 +327,19 @@ const AdminProjects = () => {
 
                   <Button
                     type="submit"
-                    disabled={allCategories.length === 0 || imageFile === null}
+                    disabled={
+                      allCategories.length === 0 ||
+                      (currentEditedId === null && imageFile === null)
+                    }
                     title={
-                      imageFile === null
+                      currentEditedId === null && imageFile === null
                         ? "Please choose a project thumbnail first."
                         : `${
                             currentEditedId === null ? "Add new" : "Edit"
                           } project`
                     }
                     className={
-                      imageFile === null
+                      currentEditedId === null && imageFile === null
                         ? "cursor-not-allowed"
                         : "cursor-pointer"
                     }
