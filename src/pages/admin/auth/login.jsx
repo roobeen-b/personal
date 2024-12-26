@@ -37,7 +37,6 @@ const AdminLogin = () => {
 
   async function onSubmit(values) {
     await handleLoginUser(values);
-    navigate("/dashboard");
   }
 
   return (
@@ -77,9 +76,12 @@ const AdminLogin = () => {
             )}
           />
           <Button type="submit">Login</Button>
-          <Button variant="underline" onClick={() => navigate("/register")}>
+          <span
+            className="ml-4 text-sm font-medium cursor-pointer"
+            onClick={() => navigate("/register")}
+          >
             Register
-          </Button>
+          </span>
         </form>
       </Form>
     </div>

@@ -41,7 +41,6 @@ const AdminRegister = () => {
 
   async function onSubmit(values) {
     await handleRegisterUser(values);
-    navigate("/login");
   }
 
   return (
@@ -95,9 +94,12 @@ const AdminRegister = () => {
             )}
           />
           <Button type="submit">Register</Button>
-          <Button variant="underline" onClick={() => navigate("/login")}>
+          <span
+            className="ml-4 text-sm font-medium cursor-pointer"
+            onClick={() => navigate("/login")}
+          >
             Login
-          </Button>
+          </span>
         </form>
       </Form>
     </div>
