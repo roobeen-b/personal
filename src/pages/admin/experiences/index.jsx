@@ -106,9 +106,11 @@ const AdminExperiencePage = () => {
       position: experience?.position,
       company: experience?.company,
       worksDone: experience?.worksDone,
-      startDate: experience?.startDate.split("T")[0],
+      startDate: experience?.startDate?.split("T")[0],
       endDate:
-        experience?.endDate === "" ? "" : experience?.endDate.split("T")[0],
+        experience?.endDate === null
+          ? new Date().toJSON().split("T")[0]
+          : experience?.endDate?.split("T")[0],
     });
     setOpen(true);
   }
