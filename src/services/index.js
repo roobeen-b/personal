@@ -95,3 +95,27 @@ export async function deleteCategoryService(id) {
 
   return data;
 }
+
+export async function fetchAllExperienceService() {
+  const { data } = await axiosInstance.get("/experience");
+
+  return data;
+}
+
+export async function addNewExperienceService(formData) {
+  const { data } = await axiosInstance.post("/experience/add", formData);
+
+  return data;
+}
+
+export async function editExperienceService({ formData, id }) {
+  const { data } = await axiosInstance.put(`/experience/edit/${id}`, formData);
+
+  return data;
+}
+
+export async function deleteExperienceService(id) {
+  const { data } = await axiosInstance.delete(`/experience/delete/${id}`);
+
+  return data;
+}
