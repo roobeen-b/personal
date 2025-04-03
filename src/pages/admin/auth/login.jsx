@@ -76,12 +76,14 @@ const AdminLogin = () => {
             )}
           />
           <Button type="submit">Login</Button>
-          <span
-            className="ml-4 text-sm font-medium cursor-pointer"
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </span>
+          {import.meta.env.VITE_ENVIRONMENT === "development" && (
+            <span
+              className="ml-4 text-sm font-medium cursor-pointer"
+              onClick={() => navigate("/register")}
+            >
+              Register
+            </span>
+          )}
         </form>
       </Form>
     </div>
