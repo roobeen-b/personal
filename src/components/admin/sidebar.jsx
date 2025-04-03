@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import {
+  BriefcaseBusiness,
   ChartBarStacked,
   ChartNoAxesCombined,
   Cpu,
@@ -34,6 +35,12 @@ const adminSidebarMenuItems = [
     label: "Categories",
     path: "/dashboard/categories",
     icon: <ChartBarStacked />,
+  },
+  {
+    id: "experiences",
+    label: "Experiences",
+    path: "/dashboard/experiences",
+    icon: <BriefcaseBusiness />,
   },
 ];
 

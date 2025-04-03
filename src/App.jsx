@@ -12,6 +12,7 @@ import AdminProjects from "./pages/admin/projects";
 import AdminSkills from "./pages/admin/skills";
 import AdminCategories from "./pages/admin/categories";
 import NotFoundPage from "./pages/not-found";
+import AdminExperiencePage from "./pages/admin/experiences";
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -28,14 +29,17 @@ function App() {
             </CheckAuth>
           }
         />
-        <Route
-          path="/register"
-          element={
-            <CheckAuth authenticated={auth?.authenticated}>
-              <AdminRegister />
-            </CheckAuth>
-          }
-        />
+        {import.meta.env.VITE_ENVIRONMENT === "development" && (
+          <Route
+            path="/register"
+            element={
+              <CheckAuth authenticated={auth?.authenticated}>
+                <AdminRegister />
+              </CheckAuth>
+            }
+          />
+        )}
+
         <Route
           path="/dashboard"
           element={
@@ -48,6 +52,7 @@ function App() {
           <Route path="projects" element={<AdminProjects />} />
           <Route path="skills" element={<AdminSkills />} />
           <Route path="categories" element={<AdminCategories />} />
+          <Route path="experiences" element={<AdminExperiencePage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

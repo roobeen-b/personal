@@ -10,18 +10,60 @@ import {
 import Button from "../common/Button";
 import { Edit, Trash2 } from "lucide-react";
 
-const AdminCard = ({ item, handleDelete, handleEdit, children }) => {
+const AdminCard = ({ item, handleDelete, handleEdit, cardFor }) => {
   return (
-    <Card className="bg-white shadow-md border-0 flex flex-col justify-between hover:scale-105 transition-transform">
+    <Card className="bg-white shadow-md border-0 flex flex-col justify-start hover:scale-105 transition-transform">
       <CardHeader>
-        <CardTitle className="text-foreground">
-          {item.name || item.title}
+        <CardTitle className="text-foreground flex justify-between">
+          {item.name || item.title || item.position}
+          <div className="text-sm text-gray-500">
+            {item.company ? (
+              <div>
+                {item?.startDate?.split("T")[0]} {" to "}{" "}
+                {item?.endDate === ""
+                  ? "Present"
+                  : item?.endDate?.split("T")[0]}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </CardTitle>
         <CardDescription className="text-gray-500">
-          {item.iconName || item.description || item.alias}
+          <div>
+            {item.iconName || item.description || item.alias || item.company}
+          </div>
         </CardDescription>
       </CardHeader>
-      <CardContent>{children && children}</CardContent>
+      <CardContent>
+        {cardFor === "project" ? (
+          <div className="h-36">
+            <img
+              src={item.thumbnail}
+              alt={item.title}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        ) : cardFor === "experience" ? (
+          <>
+            {item?.worksDone !== "" && (
+              <div className="flex flex-col">
+                Works Done:
+                <ol className="list-decimal list-inside">
+                  {item?.worksDone?.split(". ").map(
+                    (work, index) =>
+                      work.trim() && (
+                        <li key={index} className="text-sm text-gray-500">
+                          {work.trim()}
+                        </li>
+                      )
+                  )}
+                </ol>
+              </div>
+            )}
+          </>
+        ) : null}
+      </CardContent>
       <CardFooter className="flex justify-between">
         <Button
           className="text-sm border-none"

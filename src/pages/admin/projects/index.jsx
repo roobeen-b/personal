@@ -1,4 +1,4 @@
-import AdminProjectCard from "@/components/admin/AdminProjectCard";
+import AdminCard from "@/components/admin/AdminCard";
 import ProjectImageUpload from "@/components/common/ProjectImageUpload";
 import { Button } from "@/components/ui/button";
 import {
@@ -172,11 +172,12 @@ const AdminProjects = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-4">
         {allProjects && allProjects.length > 0 ? (
           allProjects?.map((project) => (
-            <AdminProjectCard
+            <AdminCard
               key={project?._id}
-              project={project}
+              item={project}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
+              cardFor="project"
             />
           ))
         ) : (

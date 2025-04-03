@@ -1,4 +1,4 @@
-import AdminCategoryCard from "@/components/admin/AdminCategoryCard";
+import AdminCard from "@/components/admin/AdminCard";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -139,11 +139,12 @@ const AdminCategories = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
         {categories && categories.length > 0 ? (
           categories?.map((category) => (
-            <AdminCategoryCard
+            <AdminCard
               key={category?._id}
-              category={category}
+              item={category}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
+              cardFor="category"
             />
           ))
         ) : (
